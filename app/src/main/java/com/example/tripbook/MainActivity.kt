@@ -19,6 +19,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,7 +42,10 @@ class MainActivity : ComponentActivity() {
             TripBookTheme {
                 Surface {
                     Modifier.fillMaxSize()
-                    Box(modifier = Modifier.fillMaxSize())
+                    Box(
+                        modifier = Modifier.fillMaxSize()
+                                .background(MaterialTheme.colorScheme.error)
+                    )
                 }
 //                val painter = painterResource(id = R.drawable.mainafter)
 //                val contentDescription = "iguana"
