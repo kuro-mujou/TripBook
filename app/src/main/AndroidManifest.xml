@@ -13,12 +13,17 @@
         android:theme="@style/Theme.TripBook"
         tools:targetApi="31">
         <activity
+            android:name=".Test"
+            android:exported="false"
+            android:label="@string/title_activity_test"
+            android:theme="@style/Theme.TripBook" />
+        <activity
             android:name="composableComponent.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.TripBook" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ActivityLayouts.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.TripBook">
