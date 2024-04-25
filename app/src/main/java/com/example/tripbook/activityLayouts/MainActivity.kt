@@ -1,9 +1,13 @@
-package com.example.tripbook.ActivityLayouts
+package com.example.tripbook.activityLayouts
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import com.example.tripbook.navigationControl.Nav
 import com.example.tripbook.ui.theme.TripBookTheme
 
 class MainActivity : ComponentActivity() {
@@ -11,8 +15,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TripBookTheme {
-                Surface {
-
+                Surface (
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ){
+                    Nav()
                 }
             }
         }

@@ -23,7 +23,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.TripBook" />
         <activity
-            android:name=".ActivityLayouts.MainActivity"
+            android:name=".activityLayouts.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.TripBook">
