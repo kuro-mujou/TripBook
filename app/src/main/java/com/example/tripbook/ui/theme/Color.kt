@@ -41,7 +41,7 @@ val surfaceContainerLowest_light = Color(0xFF)
 val surfaceDim_light = Color(0xFF)
 
 //DARK MODE COLOR
-val primary_dark = Color(0xFF6650a4)
+val primary_dark = Color(0xFFF3BC8C)
 val onPrimary_dark = Color(0xFF)
 val primaryContainer_dark = Color(0xFF)
 val onPrimaryContainer_dark = Color(0xFF)
