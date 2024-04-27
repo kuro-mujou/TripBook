@@ -3,7 +3,7 @@ package com.example.tripbook.ui.theme
 import androidx.compose.ui.graphics.Color
 
 //LIGHT MODE COLOR
-val primary_light = Color(0xFFD0BCFF)
+val primary_light = Color(0xFFF3BC8C)
 val onPrimary_light = Color(0xFF)
 val primaryContainer_light = Color(0xFF)
 val onPrimaryContainer_light = Color(0xFF)
