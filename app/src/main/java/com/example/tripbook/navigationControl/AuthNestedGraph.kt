@@ -12,5 +12,8 @@ fun NavGraphBuilder.authGraph(navController: NavController){
         composable(route = Layouts.LoginRoute.route){
             LoginLayout(navController = navController)
         }
+        composable(route = Layouts.RegisterRoute.route){
+            LoginLayout(navController = navController)
+        }
     }
 }
