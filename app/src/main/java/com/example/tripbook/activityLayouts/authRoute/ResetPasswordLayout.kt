@@ -10,16 +10,16 @@ import com.example.tripbook.navigationControl.Layouts
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterLayout(navController: NavController) {
+fun ResetPasswordLayout(navController: NavController) {
 
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    
+
     ModalBottomSheet(
         onDismissRequest = {
             navController.navigate(Layouts.WelcomePage.route)
         },
         sheetState = sheetState
     ) {
-        Text(text = "TEST REGISTER")
+        Text(text = "TEST RESET PASS")
     }
 }

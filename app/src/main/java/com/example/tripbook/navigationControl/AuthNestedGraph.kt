@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.tripbook.activityLayouts.authRoute.LoginLayout
 import com.example.tripbook.activityLayouts.authRoute.RegisterLayout
+import com.example.tripbook.activityLayouts.authRoute.ResetPasswordLayout
 import com.example.tripbook.activityLayouts.authRoute.WelcomePage
 
 fun NavGraphBuilder.authGraph(navController: NavController){
@@ -19,6 +20,9 @@ fun NavGraphBuilder.authGraph(navController: NavController){
         }
         composable(route = Layouts.RegisterRoute.route){
             RegisterLayout(navController = navController)
+        }
+        composable(route = Layouts.ResetPasswordRoute.route){
+            ResetPasswordLayout(navController = navController)
         }
     }
 }

@@ -8,7 +8,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -91,6 +95,23 @@ fun LoginLayout(navController: NavController){
                 visualTransformation = PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
+            TextField(
+                value = username,
+                onValueChange = { username = it },
+                modifier = Modifier.padding(top = 20.dp),
+                label = { Text(text = " your name")},
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Email,
+                        contentDescription ="Email icon",
+                        // tint = myColor5
+                    )
+                },
+                trailingIcon = {
+                    Icon(imageVector = Icons.AutoMirrored.Filled.Send, contentDescription = null)
+
+                },
+                shape = RoundedCornerShape(25.dp)
+            )
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -111,7 +132,9 @@ fun LoginLayout(navController: NavController){
 
                 TextButton(
                     onClick = {
-                        //reset pass
+                        scope.launch { sheetState.hide() }.invokeOnCompletion {
+                            navController.navigate(Layouts.ResetPasswordRoute.route)
+                        }
                     }
                 ) {
                     Text(
@@ -127,6 +150,7 @@ fun LoginLayout(navController: NavController){
             }) {
                 Text("Sign in")
             }
+            Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = "or continue with",
                 style = TextStyle(
@@ -134,6 +158,7 @@ fun LoginLayout(navController: NavController){
                     color = Color.Gray
                 )
             )
+            Spacer(modifier = Modifier.height(10.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
@@ -190,6 +215,21 @@ fun LoginLayout(navController: NavController){
                         )
                     )
                 }
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            TextButton(
+                onClick = {
+                    scope.launch { sheetState.hide() }.invokeOnCompletion {
+                        navController.navigate(Layouts.WelcomePage.route)
+                    }
+                }
+            ) {
+                Text(
+                    text = "Back",
+                    style = TextStyle(
+                        textDecoration = TextDecoration.Underline
+                    )
+                )
             }
         }
     }
