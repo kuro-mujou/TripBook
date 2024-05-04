@@ -1,6 +1,7 @@
 package com.example.tripbook.activityLayouts.authRoute
 
 import android.app.Activity
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +30,6 @@ fun WelcomePage(navController: NavController, modifier: Modifier = Modifier) {
         modifier = with (Modifier){
             fillMaxSize()
                 .paint(
-                    // Replace with your image id
                     painterResource(id = R.drawable.welcomepagebackground),
                     contentScale = ContentScale.FillBounds)
 
@@ -76,7 +76,9 @@ fun WelcomePage(navController: NavController, modifier: Modifier = Modifier) {
             }
         }
     }
-
+    BackHandler {
+        activity?.finish()
+    }
 }
 
 

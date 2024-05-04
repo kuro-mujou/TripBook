@@ -93,7 +93,7 @@ fun LoginLayout(navController: NavController) {
                     .height(600.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
 
-                ) {
+            ) {
                 Text(
                     text = "Welcome Back",
                     style = TextStyle(
