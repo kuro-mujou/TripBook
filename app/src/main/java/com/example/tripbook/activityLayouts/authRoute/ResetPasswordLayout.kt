@@ -1,11 +1,9 @@
 package com.example.tripbook.activityLayouts.authRoute
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
@@ -23,9 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -55,68 +50,57 @@ fun ResetPasswordLayout(navController: NavController) {
         Font(R.font.work_sans_extrabold)
     )
 
-    Box(
-        modifier = with(Modifier) {
-            fillMaxSize()
-                .paint(
-                    // Replace with your image id
-                    painterResource(id = R.drawable.welcomepagebackground),
-                    contentScale = ContentScale.FillBounds
-                )
-        }
-    ){
-        ModalBottomSheet(
-            onDismissRequest = {
-                navController.navigate(Layouts.WelcomePage.route)
-            },
-            sheetState = sheetState,
-            windowInsets = WindowInsets.ime
+    ModalBottomSheet(
+        onDismissRequest = {
+            navController.navigate(Layouts.WelcomePage.route)
+        },
+        sheetState = sheetState,
+        windowInsets = WindowInsets.ime
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(500.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top,
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(500.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top
-            ){
-                Text(
-                    text = "Reset Password",
-                    style = TextStyle(
-                        fontFamily = workSanFamily,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 40.sp
-                    )
+            Text(
+                text = "Reset Password",
+                style = TextStyle(
+                    fontFamily = workSanFamily,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 40.sp
                 )
-                Spacer(modifier = Modifier.height(5.dp))
-                Text(text = "Reset your password")
-                Spacer(modifier = Modifier.height(40.dp))
-                TextFiledCustom(
-                    hint = "Username",
-                    text = username,
-                    icon = Icons.Default.Person
-                ){
-                    username = it
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(text = "Reset your password")
+            Spacer(modifier = Modifier.height(40.dp))
+            TextFiledCustom(
+                hint = "Username",
+                text = username,
+                icon = Icons.Default.Person
+            ) {
+                username = it
+            }
+            PasswordFieldCustom(
+                hint = "New password",
+                pass = newPassword,
+            ) {
+                newPassword = it
+            }
+            PasswordFieldCustom(
+                hint = "Confirm new password",
+                pass = confirmPassword,
+            ) {
+                confirmPassword = it
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Button(
+                onClick = {
+                    //reset password function
                 }
-                PasswordFieldCustom(
-                    hint = "New password",
-                    pass = newPassword,
-                ){
-                    newPassword = it
-                }
-                PasswordFieldCustom(
-                    hint = "Confirm new password",
-                    pass = confirmPassword,
-                ){
-                    confirmPassword = it
-                }
-                Spacer(modifier = Modifier.height(20.dp))
-                Button(
-                    onClick = {
-                        //reset password function
-                    }
-                ) {
-                    Text("Confirm")
-                }
+            ) {
+                Text("Confirm")
             }
         }
     }

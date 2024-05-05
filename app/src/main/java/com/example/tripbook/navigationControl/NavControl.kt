@@ -12,5 +12,6 @@ fun Nav(){
         startDestination = Layouts.AuthRoute.route
     ){
         authGraph(navController)
+        mainGraph(navController)
     }
 }
