@@ -33,7 +33,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,11 +52,7 @@ fun RegisterLayout(navController: NavController) {
     var confirmPassword: String by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    val workSanFamily = FontFamily(
-        Font(R.font.work_sans),
-        Font(R.font.work_sans_bold),
-        Font(R.font.work_sans_extrabold)
-    )
+
 
     ModalBottomSheet(
         onDismissRequest = {
@@ -75,8 +70,9 @@ fun RegisterLayout(navController: NavController) {
             Text(
                 text = "Sign Up",
                 style = TextStyle(
-                    fontFamily = workSanFamily,
-                    fontWeight = FontWeight.ExtraBold,
+                    fontFamily = FontFamily(
+                        Font(R.font.work_sans_extrabold)
+                    ),
                     fontSize = 40.sp
                 )
             )

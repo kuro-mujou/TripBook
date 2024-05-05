@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -44,11 +43,6 @@ fun ResetPasswordLayout(navController: NavController) {
 
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    val workSanFamily = FontFamily(
-        Font(R.font.work_sans),
-        Font(R.font.work_sans_bold),
-        Font(R.font.work_sans_extrabold)
-    )
 
     ModalBottomSheet(
         onDismissRequest = {
@@ -67,8 +61,9 @@ fun ResetPasswordLayout(navController: NavController) {
             Text(
                 text = "Reset Password",
                 style = TextStyle(
-                    fontFamily = workSanFamily,
-                    fontWeight = FontWeight.ExtraBold,
+                    fontFamily = FontFamily(
+                        Font(R.font.work_sans_extrabold)
+                    ),
                     fontSize = 40.sp
                 )
             )

@@ -39,7 +39,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
@@ -60,11 +59,6 @@ fun LoginLayout(navController: NavController) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     var rememberMeCheckBox by rememberSaveable { mutableStateOf(false) }
 
-    val workSanFamily = FontFamily(
-        Font(R.font.work_sans),
-        Font(R.font.work_sans_bold),
-        Font(R.font.work_sans_extrabold)
-    )
 
     ModalBottomSheet(
         onDismissRequest = {
@@ -82,8 +76,9 @@ fun LoginLayout(navController: NavController) {
             Text(
                 text = "Welcome Back",
                 style = TextStyle(
-                    fontFamily = workSanFamily,
-                    fontWeight = FontWeight.ExtraBold,
+                    fontFamily = FontFamily(
+                        Font(R.font.work_sans_extrabold)
+                    ),
                     fontSize = 40.sp
                 )
             )
