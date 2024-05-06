@@ -1,29 +1,37 @@
-package com.example.tripbook.activityLayouts.authRoute
+package com.example.tripbook.ui.activityLayouts.authRoute
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,42 +41,43 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.tripbook.R
-import com.example.tripbook.customUIComponent.PasswordFieldCustom
-import com.example.tripbook.customUIComponent.TextFiledCustom
 import com.example.tripbook.navigationControl.Layouts
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterLayout(navController: NavController) {
-    var username: String by remember { mutableStateOf("") }
-    var email: String by remember { mutableStateOf("") }
-    var password: String by remember { mutableStateOf("") }
-    var confirmPassword: String by remember { mutableStateOf("") }
-    val scope = rememberCoroutineScope()
+fun LoginLayout(navController: NavController) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val scope = rememberCoroutineScope()
+    var username: String by remember { mutableStateOf("") }
+    var password: String by remember { mutableStateOf("") }
+    var passwordVisible by rememberSaveable { mutableStateOf(false) }
+    var rememberMeCheckBox by rememberSaveable { mutableStateOf(false) }
 
 
     ModalBottomSheet(
         onDismissRequest = {
             navController.navigate(Layouts.WelcomePage.route)
         },
-        sheetState = sheetState
+        sheetState = sheetState,
+        windowInsets = WindowInsets.ime
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxWidth()
+                .height(600.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
 
-        ) {
+            ) {
             Text(
-                text = "Sign Up",
+                text = "Welcome Back",
                 style = TextStyle(
                     fontFamily = FontFamily(
                         Font(R.font.work_sans_extrabold)
@@ -77,41 +86,94 @@ fun RegisterLayout(navController: NavController) {
                 )
             )
             Spacer(modifier = Modifier.height(5.dp))
-            Text(text = "Create your new account")
+            Text(text = "Login to your account")
             Spacer(modifier = Modifier.height(40.dp))
-            TextFiledCustom(
-                hint = "Username",
-                text = username,
-                icon = Icons.Default.Person
+            TextField(
+                value = username,
+                onValueChange = { username = it },
+                modifier = Modifier.padding(top = 10.dp),
+                placeholder = { Text(text = "Username or Email") },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = "Person icon",
+                    )
+                },
+                colors = TextFieldDefaults.colors(
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
+                ),
+                shape = RoundedCornerShape(25.dp)
+            )
+            TextField(
+                value = password,
+                onValueChange = { password = it },
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                modifier = Modifier.padding(top = 10.dp),
+                placeholder = { Text(text = "Password") },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Lock,
+                        contentDescription = "Person icon",
+                    )
+                },
+                trailingIcon = {
+                    val image = if (passwordVisible)
+                        Icons.Filled.Visibility
+                    else Icons.Filled.VisibilityOff
+                    val description = if (passwordVisible) "Hide password" else "Show password"
+
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(imageVector = image, description)
+                    }
+                },
+                colors = TextFieldDefaults.colors(
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
+                ),
+                shape = RoundedCornerShape(25.dp)
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                username = it
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButton(
+                        selected = rememberMeCheckBox,
+                        onClick = {
+                            rememberMeCheckBox = !rememberMeCheckBox
+                        }
+                    )
+                    Text(text = "Remember me", style = TextStyle(fontSize = 12.sp))
+                }
+
+                TextButton(
+                    onClick = {
+                        scope.launch { sheetState.hide() }.invokeOnCompletion {
+                            navController.navigate(Layouts.ResetPasswordRoute.route)
+                        }
+                    }
+                ) {
+                    Text(
+                        text = "Forgot password",
+                        style = TextStyle(
+                            textDecoration = TextDecoration.Underline
+                        )
+                    )
+                }
             }
-            TextFiledCustom(
-                hint = "Email",
-                text = email,
-                icon = Icons.Default.Email
-            ) {
-                email = it
-            }
-            PasswordFieldCustom(
-                hint = "Password",
-                pass = password,
-            ) {
-                password = it
-            }
-            PasswordFieldCustom(
-                hint = "Confirm password",
-                pass = confirmPassword,
-            ) {
-                confirmPassword = it
-            }
-            Spacer(modifier = Modifier.height(20.dp))
             Button(
                 onClick = {
-                    //register function
+                    //login function
+                    navController.navigate(Layouts.MainRoute.route)
                 }
             ) {
-                Text("Sign up")
+                Text("Sign in")
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text(
@@ -121,10 +183,9 @@ fun RegisterLayout(navController: NavController) {
                     color = Color.Gray
                 )
             )
+            Spacer(modifier = Modifier.height(10.dp))
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
                 IconButton(
@@ -150,13 +211,14 @@ fun RegisterLayout(navController: NavController) {
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(10.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Already have an account?",
+                    text = "You don’t have any account?",
                     style = TextStyle(
                         color = Color.Gray
                     )
@@ -164,12 +226,12 @@ fun RegisterLayout(navController: NavController) {
                 TextButton(
                     onClick = {
                         scope.launch { sheetState.hide() }.invokeOnCompletion {
-                            navController.navigate(Layouts.LoginRoute.route)
+                            navController.navigate(Layouts.RegisterRoute.route)
                         }
                     }
                 ) {
                     Text(
-                        text = "Sign in",
+                        text = "Sign up",
                         style = TextStyle(
                             textDecoration = TextDecoration.Underline
                         )

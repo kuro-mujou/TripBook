@@ -1,4 +1,4 @@
-package com.example.tripbook.activityLayouts.mainRoute
+package com.example.tripbook.ui.activityLayouts.mainRoute
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

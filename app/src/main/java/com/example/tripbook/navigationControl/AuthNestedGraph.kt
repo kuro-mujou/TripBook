@@ -4,10 +4,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.tripbook.activityLayouts.authRoute.LoginLayout
-import com.example.tripbook.activityLayouts.authRoute.RegisterLayout
-import com.example.tripbook.activityLayouts.authRoute.ResetPasswordLayout
-import com.example.tripbook.activityLayouts.authRoute.WelcomePage
+import com.example.tripbook.ui.activityLayouts.authRoute.LoginLayout
+import com.example.tripbook.ui.activityLayouts.authRoute.RegisterLayout
+import com.example.tripbook.ui.activityLayouts.authRoute.ResetPasswordLayout
+import com.example.tripbook.ui.activityLayouts.authRoute.WelcomePage
 
 fun NavGraphBuilder.authGraph(navController: NavController){
     navigation(startDestination = Layouts.WelcomePage.route,route =Layouts.AuthRoute.route)

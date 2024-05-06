@@ -1,4 +1,4 @@
-package com.example.tripbook.activityLayouts.authRoute
+package com.example.tripbook.ui.activityLayouts.authRoute
 
 import android.app.Activity
 import androidx.activity.compose.BackHandler

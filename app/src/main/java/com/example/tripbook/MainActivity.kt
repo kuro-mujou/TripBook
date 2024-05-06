@@ -1,4 +1,4 @@
-package com.example.tripbook.activityLayouts
+package com.example.tripbook
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

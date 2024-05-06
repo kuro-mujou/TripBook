@@ -1,4 +1,4 @@
-package com.example.tripbook.customUIComponent
+package com.example.tripbook.ui.customUIComponent
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape

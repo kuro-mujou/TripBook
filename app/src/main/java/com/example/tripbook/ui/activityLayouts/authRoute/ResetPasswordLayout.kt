@@ -1,4 +1,4 @@
-package com.example.tripbook.activityLayouts.authRoute
+package com.example.tripbook.ui.activityLayouts.authRoute
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.tripbook.R
-import com.example.tripbook.customUIComponent.PasswordFieldCustom
-import com.example.tripbook.customUIComponent.TextFiledCustom
+import com.example.tripbook.ui.customUIComponent.PasswordFieldCustom
+import com.example.tripbook.ui.customUIComponent.TextFiledCustom
 import com.example.tripbook.navigationControl.Layouts
 
 @OptIn(ExperimentalMaterial3Api::class)
