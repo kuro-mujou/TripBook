@@ -7,6 +7,7 @@ sealed class Layouts (val route : String){
         data object RegisterRoute : Layouts(route = "Register")
         data object WelcomePage : Layouts(route = "WelcomePage")
         data object ResetPasswordRoute : Layouts(route = "ResetPassword")
+        data object GoogleAuthRoute : Layouts(route = "GoogleAuth")
         //Main route
         data object HomePageRoute : Layouts(route = "HomePage")
 

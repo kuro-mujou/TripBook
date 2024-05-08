@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
@@ -27,6 +27,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,14 +54,18 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginLayout(navController: NavController) {
+fun LoginLayout(
+    navController: NavController,
+    authenticated: Boolean,
+    onSuccessfulSignIn: (String, String) -> Unit,
+    navigateToHome: () -> Unit
+) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
-    var username: String by remember { mutableStateOf("") }
+    var email: String by remember { mutableStateOf("") }
     var password: String by remember { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     var rememberMeCheckBox by rememberSaveable { mutableStateOf(false) }
-
 
     ModalBottomSheet(
         onDismissRequest = {
@@ -89,13 +94,13 @@ fun LoginLayout(navController: NavController) {
             Text(text = "Login to your account")
             Spacer(modifier = Modifier.height(40.dp))
             TextField(
-                value = username,
-                onValueChange = { username = it },
+                value = email,
+                onValueChange = { email = it },
                 modifier = Modifier.padding(top = 10.dp),
-                placeholder = { Text(text = "Username or Email") },
+                placeholder = { Text(text = "Email") },
                 leadingIcon = {
                     Icon(
-                        imageVector = Icons.Default.Person,
+                        imageVector = Icons.Default.MailOutline,
                         contentDescription = "Person icon",
                     )
                 },
@@ -169,8 +174,7 @@ fun LoginLayout(navController: NavController) {
             }
             Button(
                 onClick = {
-                    //login function
-                    navController.navigate(Layouts.MainRoute.route)
+                    onSuccessfulSignIn(email, password)
                 }
             ) {
                 Text("Sign in")
@@ -201,7 +205,7 @@ fun LoginLayout(navController: NavController) {
                 }
                 IconButton(
                     onClick = {
-                        /*login with google*/
+                        navController.navigate(Layouts.GoogleAuthRoute.route)
                     },
                     modifier = Modifier.weight(1f)
                 ) {
@@ -253,6 +257,12 @@ fun LoginLayout(navController: NavController) {
                     )
                 )
             }
+        }
+    }
+
+    LaunchedEffect(key1 = authenticated) {
+        if (authenticated) {
+            navigateToHome()
         }
     }
 }

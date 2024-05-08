@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,7 +48,12 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterLayout(navController: NavController) {
+fun RegisterLayout(
+    navController: NavController,
+    authenticated: Boolean,
+    onSuccessfulSignIn: (String, String) -> Unit,
+    navigateToHome: () -> Unit
+) {
     var username: String by remember { mutableStateOf("") }
     var email: String by remember { mutableStateOf("") }
     var password: String by remember { mutableStateOf("") }
@@ -111,7 +117,7 @@ fun RegisterLayout(navController: NavController) {
             Spacer(modifier = Modifier.height(20.dp))
             Button(
                 onClick = {
-                    //register function
+                    onSuccessfulSignIn(email, password)
                 }
             ) {
                 Text("Sign up")
@@ -143,7 +149,7 @@ fun RegisterLayout(navController: NavController) {
                 }
                 IconButton(
                     onClick = {
-                        /*login with google*/
+                        navController.navigate(Layouts.GoogleAuthRoute.route)
                     },
                     modifier = Modifier.weight(1f)
                 ) {
@@ -194,6 +200,12 @@ fun RegisterLayout(navController: NavController) {
                     )
                 )
             }
+        }
+    }
+
+    LaunchedEffect(key1 = authenticated) {
+        if (authenticated) {
+            navigateToHome()
         }
     }
 }

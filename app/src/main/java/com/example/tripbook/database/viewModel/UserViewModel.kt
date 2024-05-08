@@ -21,6 +21,8 @@ class UserViewModel : ViewModel() {
                 val newAccount = Account().apply {
                     this.username = username
                     this.password = password
+                    this.email = email
+                    this.securityQuestion = securityQuestion
                     this.isServiceProvider = isServiceProvider
                     this.user = User()
                 }

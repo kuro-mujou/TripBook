@@ -1,17 +1,26 @@
 package com.example.tripbook.navigationControl
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun Nav(){
-    val navController = rememberNavController()
+fun SetupNavGraph(
+    startDestination: String,
+    navController: NavHostController
+){
     NavHost(
         navController = navController,
-        startDestination = Layouts.AuthRoute.route
+        startDestination = startDestination
     ){
-        authGraph(navController)
+        authGraph(
+            navController,
+            navigateToHome = {
+                navController.navigate(Layouts.MainRoute.route){
+                    popUpTo(Layouts.AuthRoute.route)
+                }
+            }
+        )
         mainGraph(navController)
     }
 }
