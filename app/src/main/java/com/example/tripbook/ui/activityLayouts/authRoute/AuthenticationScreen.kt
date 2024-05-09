@@ -1,6 +1,7 @@
 package com.example.tripbook.ui.activityLayouts.authRoute
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -49,9 +50,11 @@ fun AuthenticationScreen(
         clientId = CLIENT_ID,
         onTokenIdReceived = { tokenId ->
             onSuccessfulSignIn(tokenId)
+            Log.d("LOG", tokenId)
         },
         onDialogDismissed = { message ->
             onDialogDismissed(message)
+            Log.d("LOG", message)
         }
     )
 

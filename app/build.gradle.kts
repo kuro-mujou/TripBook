@@ -73,5 +73,6 @@ dependencies {
 
     //github implementation
     implementation(libs.onetapcompose)
-    implementation(libs.messagebarcompose)
+    implementation("com.github.stevdza-san:MessageBarCompose:1.0.5")
+//    implementation(libs.messagebarcompose)
 }

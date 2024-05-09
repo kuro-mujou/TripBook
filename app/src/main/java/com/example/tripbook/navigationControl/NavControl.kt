@@ -15,10 +15,13 @@ fun SetupNavGraph(
     ){
         authGraph(
             navController,
+//            navigateToHome = {
+//                navController.navigate(Layouts.MainRoute.route){
+//                    popUpTo(Layouts.AuthRoute.route)
+//                }
             navigateToHome = {
-                navController.navigate(Layouts.MainRoute.route){
-                    popUpTo(Layouts.AuthRoute.route)
-                }
+                navController.popBackStack()
+                navController.navigate(Layouts.MainRoute.route)
             }
         )
         mainGraph(navController)
