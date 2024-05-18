@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.library.sync)
+    implementation(libs.androidx.benchmark.macro)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
