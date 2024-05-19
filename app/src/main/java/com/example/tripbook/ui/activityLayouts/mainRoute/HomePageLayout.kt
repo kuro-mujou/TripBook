@@ -285,6 +285,7 @@ fun HomePageLayout(navController: NavController, modifier: Modifier = Modifier) 
                             selected = bottomNavState == index,
                             onClick = { bottomNavState = index },
                             icon = {
+
                                 BadgedBox(badge = {
                                     if (item.badgeNum != 0) Badge {
                                         Text(text = "${item.badgeNum}")
