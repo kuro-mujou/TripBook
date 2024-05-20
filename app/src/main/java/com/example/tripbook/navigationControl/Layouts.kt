@@ -10,6 +10,9 @@ sealed class Layouts (val route : String){
         data object GoogleAuthRoute : Layouts(route = "GoogleAuth")
         //Main route
         data object HomePageRoute : Layouts(route = "HomePage")
+        data object HotelBookingRoute : Layouts(route = "HotelBooking")
+        data object TripRout : Layouts(route = "Trip")
+        data object Transport : Layouts(route = "Transport")
 
     //nested graph route
     data object AuthRoute : Layouts(route = "Auth")
