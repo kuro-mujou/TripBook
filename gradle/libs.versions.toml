@@ -15,6 +15,7 @@ onetapcompose = "1.0.0"
 realmGradlePlugin = "10.18.0"
 librarySync = "1.16.0"
 benchmarkMacro = "1.2.4"
+datetime = "0.2.9"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.13.1" }
@@ -38,6 +39,7 @@ onetapcompose = { module = "com.github.stevdza-san:OneTapCompose", version.ref =
 realm-gradle-plugin = { group = "io.realm", name = "realm-gradle-plugin", version.ref = "realmGradlePlugin" }
 library-sync = { group = "io.realm.kotlin", name = "library-sync", version.ref = "librarySync" }
 androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro", version.ref = "benchmarkMacro" }
+datetime = { group = "com.vanpra.compose-material-dialogs", name = "datetime", version.ref = "datetime" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

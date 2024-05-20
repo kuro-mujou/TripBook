@@ -11,8 +11,10 @@ sealed class Layouts (val route : String){
         //Main route
         data object HomePageRoute : Layouts(route = "HomePage")
         data object HotelBookingRoute : Layouts(route = "HotelBooking")
+
+        data object TransportsBookingRoute : Layouts(route = "TransportsBooking")
         data object TripRout : Layouts(route = "Trip")
-        data object Transport : Layouts(route = "Transport")
+        data object LoadingRoute : Layouts(route = "Loading")
 
     //nested graph route
     data object AuthRoute : Layouts(route = "Auth")

@@ -414,7 +414,9 @@ fun HomePageLayout(navController: NavController, modifier: Modifier = Modifier) 
                     }
                     Row {
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                navController.navigate(Layouts.TripRout.route)
+                            },
                             modifier = Modifier.padding(10.dp)
                         ) {
                             Column(
@@ -430,7 +432,9 @@ fun HomePageLayout(navController: NavController, modifier: Modifier = Modifier) 
                             }
                         }
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                      navController.navigate(Layouts.HotelBookingRoute.route)
+                            },
                             modifier = Modifier.padding(10.dp)
                         ) {
                             Column(
@@ -448,7 +452,9 @@ fun HomePageLayout(navController: NavController, modifier: Modifier = Modifier) 
                     }
                     Row {
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                navController.navigate(Layouts.TransportsBookingRoute.route)
+                            },
                             modifier = Modifier.padding(10.dp)
                         ) {
                             Column(
@@ -464,7 +470,9 @@ fun HomePageLayout(navController: NavController, modifier: Modifier = Modifier) 
                             }
                         }
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                navController.navigate(Layouts.LoadingRoute.route)
+                            },
                             modifier = Modifier.padding(10.dp)
                         ) {
                             Column(
@@ -542,5 +550,4 @@ data class DrawerItems(
     val badgeCount: Int,
     val hasBadge: Boolean
 )
-
 
