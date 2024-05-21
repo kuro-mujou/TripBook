@@ -1,6 +1,8 @@
 package com.example.tripbook.navigationControl
 
 sealed class Layouts (val route : String){
+
+
     //layout route
         //Auth route
         data object LoginRoute : Layouts(route = "Login")
@@ -15,6 +17,7 @@ sealed class Layouts (val route : String){
         data object TransportsBookingRoute : Layouts(route = "TransportsBooking")
         data object TripRout : Layouts(route = "Trip")
         data object LoadingRoute : Layouts(route = "Loading")
+        data object RoomAndGuestRoute : Layouts(route = "RoomAndGuest")
 
     //nested graph route
     data object AuthRoute : Layouts(route = "Auth")
