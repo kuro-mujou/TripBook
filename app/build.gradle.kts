@@ -64,7 +64,6 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.library.sync)
     implementation(libs.androidx.benchmark.macro)
-    implementation (libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -72,4 +71,10 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //github implementation
+    implementation(libs.onetapcompose)
+    implementation("com.github.stevdza-san:MessageBarCompose:1.0.5")
+    implementation ("androidx.navigation:navigation-compose:2.7.7")
+//    implementation(libs.messagebarcompose)
 }

@@ -1,4 +1,4 @@
-package com.example.tripbook.ui.activityLayouts.mainRoute
+package com.example.tripbook.ui.activityLayouts.mainRoute.TransportsBookingRoute
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
@@ -7,10 +7,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
 @Composable
-fun TripLayout(navController: NavController, modifier: Modifier) {
+fun TransportBookingLayout(navController: NavController) {
     Row(
 
     ) {
-        Text(text = "Hotel Booking")
+        Text(text = "Transport Booking")
     }
 }
