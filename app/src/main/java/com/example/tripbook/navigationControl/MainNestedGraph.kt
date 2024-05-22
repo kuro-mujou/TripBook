@@ -33,7 +33,6 @@ fun NavGraphBuilder.mainGraph(
             HotelBookingLayout(navController = navController)
 
         }
-
         composable(
             route = Layouts.TripRout.route
         ){
@@ -49,7 +48,6 @@ fun NavGraphBuilder.mainGraph(
         ){
             LoadingLayout(navController = navController)
         }
-
         composable(
             route = Layouts.RoomAndGuestRoute.route
         ){
