@@ -1,6 +1,9 @@
 package com.example.tripbook.database.viewModel
 
 import com.example.tripbook.database.model.Account
+import com.example.tripbook.database.model.Address
+import com.example.tripbook.database.model.BankInfo
+import com.example.tripbook.database.model.User
 import com.example.tripbook.database.viewModel.Constants.APP_ID
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
@@ -8,6 +11,7 @@ import io.realm.kotlin.log.LogLevel
 import io.realm.kotlin.mongodb.App
 import io.realm.kotlin.mongodb.sync.SyncConfiguration
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.util.Objects
 
 object MongoDB : MongoRepository {
@@ -23,7 +27,7 @@ object MongoDB : MongoRepository {
         if (user != null) {
             val config = SyncConfiguration.Builder(
                 user,
-                setOf()
+                setOf(Account::class,Address::class,BankInfo::class, User::class)
             )
                 .initialSubscriptions { sub ->
                     add(query = sub.query<Account>(query = "owner_id == $0", user.id))
@@ -34,8 +38,8 @@ object MongoDB : MongoRepository {
         }
     }
 
-    override fun getData(): Flow<List<Objects>> {
-        TODO("Not yet implemented")
+    override fun getData(): Flow<List<Account>> {
+        return realm.query<Account>().asFlow().map { it.list }
     }
 
     override fun filterData(): Flow<List<Objects>> {

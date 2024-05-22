@@ -9,16 +9,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.tripbook.ui.activityLayouts.authRoute.AuthenticationScreen
-import com.example.tripbook.ui.activityLayouts.authRoute.AuthenticationViewModel
 import com.example.tripbook.ui.activityLayouts.authRoute.LoginLayout
 import com.example.tripbook.ui.activityLayouts.authRoute.LoginLayoutViewModel
 import com.example.tripbook.ui.activityLayouts.authRoute.RegisterLayout
 import com.example.tripbook.ui.activityLayouts.authRoute.RegisterLayoutViewModel
 import com.example.tripbook.ui.activityLayouts.authRoute.ResetPasswordLayout
 import com.example.tripbook.ui.activityLayouts.authRoute.WelcomePage
-import com.stevdzasan.messagebar.rememberMessageBarState
-import com.stevdzasan.onetap.rememberOneTapSignInState
 
 @OptIn(ExperimentalMaterial3Api::class)
 fun NavGraphBuilder.authGraph(
@@ -79,42 +75,6 @@ fun NavGraphBuilder.authGraph(
         }
         composable(route = Layouts.ResetPasswordRoute.route) {
             ResetPasswordLayout(navController = navController)
-        }
-        composable(route = Layouts.GoogleAuthRoute.route) {
-            val viewModel: AuthenticationViewModel = viewModel()
-            val authenticated by viewModel.authenticated
-            val loadingState by viewModel.loadingState
-            val oneTapState = rememberOneTapSignInState()
-            val messageBarState = rememberMessageBarState()
-
-            AuthenticationScreen(
-                authenticated = authenticated,
-                loadingState = loadingState,
-                oneTapState = oneTapState,
-                messageBarState = messageBarState,
-                onButtonClicked = {
-                    oneTapState.open()
-                    viewModel.setLoading(true)
-                },
-                onSuccessfulSignIn = { tokenId ->
-                    viewModel.signInWithMongoAtlas(
-                        tokenId = tokenId,
-                        onSuccess = {
-                            messageBarState.addSuccess("Successfully Authenticated!")
-                            viewModel.setLoading(false)
-                        },
-                        onError = {
-                            messageBarState.addError(it)
-                            viewModel.setLoading(false)
-                        }
-                    )
-                },
-                onDialogDismissed = { message ->
-                    messageBarState.addError(Exception(message))
-                    viewModel.setLoading(false)
-                },
-                navigateToHome = navigateToHome
-            )
         }
     }
 }

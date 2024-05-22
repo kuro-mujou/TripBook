@@ -1,6 +1,5 @@
 package com.example.tripbook.ui.activityLayouts.authRoute
 
-import androidx.benchmark.perfetto.Row
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,22 +37,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.tripbook.R
 import com.example.tripbook.navigationControl.Layouts
-import com.example.tripbook.ui.activityLayouts.mainRoute.HomePageLayout
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -182,42 +176,6 @@ fun LoginLayout(
                 }
             ) {
                 Text("Sign in")
-            }
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = "or continue with",
-                style = TextStyle(
-                    textDecoration = TextDecoration.Underline,
-                    color = Color.Gray
-                )
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                IconButton(
-                    onClick = {
-                        /*login with facebook*/
-                    },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(R.drawable.vector_facebook_icon),
-                        contentDescription = "login with facebook"
-                    )
-                }
-                IconButton(
-                    onClick = {
-                        navController.navigate(Layouts.GoogleAuthRoute.route)
-                    },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(R.drawable.vector_google_icon),
-                        contentDescription = "login with google"
-                    )
-                }
             }
             Spacer(modifier = Modifier.height(10.dp))
             Row(

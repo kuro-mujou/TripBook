@@ -9,14 +9,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -31,8 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -123,42 +118,6 @@ fun RegisterLayout(
                 Text("Sign up")
             }
             Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = "or continue with",
-                style = TextStyle(
-                    textDecoration = TextDecoration.Underline,
-                    color = Color.Gray
-                )
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                IconButton(
-                    onClick = {
-                        /*login with facebook*/
-                    },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(R.drawable.vector_facebook_icon),
-                        contentDescription = "login with facebook"
-                    )
-                }
-                IconButton(
-                    onClick = {
-                        navController.navigate(Layouts.GoogleAuthRoute.route)
-                    },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(R.drawable.vector_google_icon),
-                        contentDescription = "login with google"
-                    )
-                }
-            }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
