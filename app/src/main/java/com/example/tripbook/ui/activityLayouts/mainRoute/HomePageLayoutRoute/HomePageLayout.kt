@@ -67,6 +67,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.tripbook.R
 import com.example.tripbook.database.model.Account
+import com.example.tripbook.navigationControl.Layouts
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -402,7 +403,7 @@ fun HomePageLayout(
                     }
                     Row {
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = { navController.navigate(Layouts.TripRout.route) },
                             modifier = Modifier.padding(10.dp)
                         ) {
                             Column(
@@ -418,7 +419,7 @@ fun HomePageLayout(
                             }
                         }
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = { navController.navigate(Layouts.HotelBookingRoute.route)},
                             modifier = Modifier.padding(10.dp)
                         ) {
                             Column(
@@ -436,7 +437,7 @@ fun HomePageLayout(
                     }
                     Row {
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = { navController.navigate(Layouts.TransportsBookingRoute.route)},
                             modifier = Modifier.padding(10.dp)
                         ) {
                             Column(
@@ -452,7 +453,7 @@ fun HomePageLayout(
                             }
                         }
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = { navController.navigate(Layouts.LoadingRoute.route) },
                             modifier = Modifier.padding(10.dp)
                         ) {
                             Column(
