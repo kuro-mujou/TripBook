@@ -49,8 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.tripbook.R
 import com.example.tripbook.navigationControl.Layouts
-import com.example.tripbook.ui.activityLayouts.mainRoute.HomePageLayoutRoute.ColumnItem
-import com.example.tripbook.ui.activityLayouts.mainRoute.HomePageLayoutRoute.NavItemState
+import com.example.tripbook.ui.activityLayouts.mainRoute.ColumnItem
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

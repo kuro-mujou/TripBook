@@ -1,10 +1,13 @@
 package com.example.tripbook.navigationControl
 
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.tripbook.ui.activityLayouts.mainRoute.HomePageLayout
+import com.example.tripbook.ui.activityLayouts.mainRoute.HomeViewModel
 
 fun NavGraphBuilder.mainGraph(navController: NavController){
     navigation(startDestination = Layouts.HomePageRoute.route,route = Layouts.MainRoute.route)
@@ -12,7 +15,12 @@ fun NavGraphBuilder.mainGraph(navController: NavController){
         composable(
             route = Layouts.HomePageRoute.route
         ){
-            HomePageLayout(navController = navController)
+            val viewModel: HomeViewModel = viewModel()
+            val data by viewModel.data
+            HomePageLayout(
+                navController = navController,
+                data = data
+            )
         }
 
 
