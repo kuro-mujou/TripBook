@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
@@ -60,6 +62,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -167,6 +170,7 @@ fun HomePageLayout(
     val scope = rememberCoroutineScope()
     var searchText by remember { mutableStateOf("") }
 
+
     ModalNavigationDrawer(
         drawerContent = {
             ModalDrawerSheet {
@@ -252,19 +256,19 @@ fun HomePageLayout(
         drawerState = drawerState
     ) {
         Scaffold(
-            topBar = {
-                TopAppBar(title = { Text(text = "Home") },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            scope.launch {
-                                drawerState.open()
-                            }
-                        }) {
-                            Icon(imageVector = Icons.Filled.Menu, contentDescription = "menu Icon")
-                        }
-                    }
-                )
-            },
+//            topBar = {
+//                TopAppBar(title = { Text(text = "Home") },
+//                    navigationIcon = {
+//                        IconButton(onClick = {
+//                            scope.launch {
+//                                drawerState.open()
+//                            }
+//                        }) {
+//                            Icon(imageVector = Icons.Filled.Menu, contentDescription = "menu Icon")
+//                        }
+//                    }
+//                )
+//            },
             bottomBar = {
                 NavigationBar(
                     modifier
@@ -272,7 +276,15 @@ fun HomePageLayout(
                     items.forEachIndexed { index, item ->
                         NavigationBarItem(
                             selected = bottomNavState == index,
-                            onClick = { bottomNavState = index },
+                            onClick = {
+                                bottomNavState = index
+                                when (index) {
+                                    //0 -> navController.navigate("route_to_home")
+                                    1 -> navController.navigate(Layouts.FavouritesRoute.route)
+                                    2 -> navController.navigate(Layouts.ProfileRoute.route)
+                                    //3 -> navController.navigate("route_to_sign_out")
+                                }
+                                      },
                             icon = {
 
                                 BadgedBox(badge = {
@@ -292,11 +304,15 @@ fun HomePageLayout(
                     }
                 }
             },
-        ) { contentPadding ->
+
+        )
+
+
+        { contentPadding ->
             Column(
                 modifier
                     .padding(contentPadding)
-                    .fillMaxSize(),
+                    .fillMaxWidth(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -304,15 +320,8 @@ fun HomePageLayout(
                     modifier = Modifier
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
+
                 ) {
-//                    Row(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .padding(horizontal = 20.dp),
-//                        horizontalArrangement = Arrangement.SpaceBetween
-//                    ){
-//
-//                    }
                     OutlinedTextField(
                         value = searchText,
                         onValueChange = { searchText = it },
@@ -325,7 +334,18 @@ fun HomePageLayout(
                                 imageVector = Icons.Default.Search,
                                 contentDescription = "Search Icon"
                             )
-                        }
+                        },
+                        trailingIcon = {
+                            IconButton(onClick = { searchText = "" }) {
+                                Icon(
+                                    imageVector = Icons.Default.Clear,
+                                    contentDescription = "Clear"
+                                )
+                            }
+                        },
+                        keyboardOptions = KeyboardOptions(
+                            imeAction = ImeAction.Done
+                        )
                     )
                     Row(
                         modifier = Modifier

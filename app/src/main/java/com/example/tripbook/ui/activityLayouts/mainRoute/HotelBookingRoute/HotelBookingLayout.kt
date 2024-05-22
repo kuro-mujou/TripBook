@@ -1,16 +1,20 @@
 package com.example.tripbook.ui.activityLayouts.mainRoute.HotelBookingRoute
 
+import android.app.DatePickerDialog
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -20,19 +24,36 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Hotel
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.LocationSearching
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.MonetizationOn
 import androidx.compose.material.icons.filled.Money
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,20 +62,33 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.tripbook.R
 import com.example.tripbook.navigationControl.Layouts
 import com.example.tripbook.ui.activityLayouts.mainRoute.ColumnItem
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+
+
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -142,13 +176,22 @@ fun HotelBookingLayout(navController: NavController) {
     var showDialog by remember { mutableStateOf(false) }
     var startDate by remember { mutableStateOf<Date?>(null) }
     var endDate by remember { mutableStateOf<Date?>(null) }
+    var showStartDatePicker by remember { mutableStateOf(false) }
+    var showEndDatePicker by remember { mutableStateOf(false) }
 
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     val dateRange = if (startDate != null && endDate != null) {
         "${dateFormat.format(startDate!!)} - ${dateFormat.format(endDate!!)}"
     } else {
         "Select Date Range"
     }
+    var showBottomSheet by remember { mutableStateOf(false) }
+    var priceMin by remember { mutableStateOf(0) }
+    var priceMax by remember { mutableStateOf(100) }
+
+//    val LocalNumberOfRooms = compositionLocalOf { mutableStateOf(0) }
+//    val LocalNumberOfGuests = compositionLocalOf { mutableStateOf(0) }
     Scaffold(
 
         bottomBar = {
@@ -159,7 +202,15 @@ fun HotelBookingLayout(navController: NavController) {
                 items.forEachIndexed { index, item ->
                     NavigationBarItem(
                         selected = bottomNavState == index,
-                        onClick = { bottomNavState = index },
+                        onClick = {
+                            bottomNavState = index
+                            when (index) {
+                                //0 -> navController.navigate("route_to_home")
+                                1 -> navController.navigate(Layouts.MyRoomRoute.route)
+                                2 -> navController.navigate(Layouts.AccountRoute.route)
+                                //3 -> navController.navigate("route_to_sign_out")
+                            }
+                                  },
                         icon = {
 
                             BadgedBox(badge = {
@@ -183,21 +234,25 @@ fun HotelBookingLayout(navController: NavController) {
         Column(
             modifier = Modifier
                 .padding(contentPadding)
-                .fillMaxSize(),
+
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    //.align(Alignment.Sta)
                     .padding(horizontal = 20.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {
+                    navController.navigate(Layouts.HomePageRoute.route)
+                }) {
                     Icon(Icons.Default.ArrowBack, contentDescription = "")
                 }
             }
+            Spacer(modifier = Modifier.height(50.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -255,8 +310,7 @@ fun HotelBookingLayout(navController: NavController) {
                     },
                     trailingIcon = {
                         IconButton(onClick = {
-                            // tạo chức năng date range picker ở đây
-                            showDialog = true
+                            showStartDatePicker = true
                         }) {
                             Icon(
                                 imageVector = Icons.Default.CalendarToday,
@@ -266,6 +320,20 @@ fun HotelBookingLayout(navController: NavController) {
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
+                if (showStartDatePicker) {
+                    ShowDatePickerDialog { newDate ->
+                        startDate = newDate
+                        showStartDatePicker = false
+                        showEndDatePicker = true
+                    }
+                }
+
+                if (showEndDatePicker) {
+                    ShowDatePickerDialog { newDate ->
+                        endDate = newDate
+                        showEndDatePicker = false
+                    }
+                }
 
 
             }
@@ -277,13 +345,15 @@ fun HotelBookingLayout(navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 TextField(
+                    //value = "${numberOfRooms.value} Rooms, ${numberOfGuests.value} Guests",
+                    //value = "${LocalNumberOfRooms.current.value} Rooms, ${LocalNumberOfGuests.current.value} Guests",
+                    //value = "${LocalNumberOfRooms.current} Rooms, ${LocalNumberOfGuests.current} Guests",
                     value = "",
                     onValueChange = {
 
                     },
                     readOnly = true,
                     label = { Text(text = "Room and Guest") },
-                    //placeholder = { Text(text = "search for locations or hotels") },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Default.Hotel,
@@ -311,30 +381,29 @@ fun HotelBookingLayout(navController: NavController) {
                     .padding(horizontal = 20.dp),
             ) {
                 TextField(
-                    value = "",
-                    onValueChange = {
-
-                    },
+                    value = "$priceMin - $priceMax",
+                    onValueChange = {},
                     readOnly = true,
                     label = { Text(text = "Price Range") },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Default.MonetizationOn,
-                            contentDescription = "Room"
+                            contentDescription = "Price"
                         )
                     },
                     trailingIcon = {
-                        IconButton(onClick = {
-                        }) {
+                        IconButton(onClick = {  }) {
                             Icon(
                                 imageVector = Icons.Default.Money,
                                 contentDescription = ""
                             )
                         }
-                    },
+                    }
+                )
 
 
-                    )
+
+
             }
             Spacer(modifier = Modifier.height(20.dp))
             Row(
@@ -383,3 +452,39 @@ data class NavItemState(
     val hasBadge: Boolean,
     val badgeNum: Int
 )
+@Composable
+fun ShowDatePickerDialog(
+    onDatePicked: (Date) -> Unit
+) {
+    val context = LocalContext.current
+    val calendar = Calendar.getInstance()
+
+    DisposableEffect(Unit) {
+        val datePickerDialog = DatePickerDialog(
+            context,
+            { _, year, month, dayOfMonth ->
+                calendar.set(year, month, dayOfMonth)
+                val pickedDate = calendar.time
+                onDatePicked(pickedDate)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
+
+        onDispose {
+            datePickerDialog.dismiss()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BottomSheetLayout(navController: NavController) {
+
+}
+
+
+
+
