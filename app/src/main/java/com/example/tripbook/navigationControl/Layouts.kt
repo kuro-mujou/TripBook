@@ -23,6 +23,7 @@ sealed class Layouts (val route : String){
     data object FavouritesRoute : Layouts(route = "Favourites")
     data object MyRoomRoute : Layouts(route = "MyRoom")
     data object AccountRoute : Layouts(route = "Account")
+    data object Confirm_SelectHotelRoute : Layouts(route = "Confirm_SelectHotel")
 
 
     //nested graph route
