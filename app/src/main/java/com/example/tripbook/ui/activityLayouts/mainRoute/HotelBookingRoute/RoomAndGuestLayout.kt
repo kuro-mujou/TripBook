@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -178,7 +179,11 @@ fun RoomAndGuestLayout(navController: NavController) {
                         }
                         Text("<=17", color = Color.Gray, modifier = Modifier.padding(horizontal = 16.dp))
                     }
-                    Divider(color = Color.Gray, thickness = 1.dp, modifier = Modifier.padding(vertical = 8.dp))
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        thickness = 1.dp,
+                        color = Color.Gray
+                    )
                 }
             }
 
