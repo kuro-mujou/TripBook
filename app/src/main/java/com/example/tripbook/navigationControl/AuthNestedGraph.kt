@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.example.tripbook.database.viewModel.MongoDB
 import com.example.tripbook.ui.activityLayouts.authRoute.LoginLayout
 import com.example.tripbook.ui.activityLayouts.authRoute.LoginLayoutViewModel
 import com.example.tripbook.ui.activityLayouts.authRoute.RegisterLayout
@@ -39,9 +40,10 @@ fun NavGraphBuilder.authGraph(
                         password = password,
                         onSuccess = {
                             Toast.makeText(mContext, "Successfully Authenticated!", Toast.LENGTH_LONG).show()
+                            MongoDB.run {  }
                         },
                         onError = {
-                            Toast.makeText(mContext, it.message, Toast.LENGTH_LONG).show()
+                            Toast.makeText(mContext, it.message + "sign in", Toast.LENGTH_LONG).show()
                         }
                     )
                 },

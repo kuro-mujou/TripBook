@@ -10,9 +10,6 @@ activityCompose = "1.8.2"
 composeBom = "2024.04.01"
 navigationCompose = "2.7.7"
 materialIconsExtended = "1.6.6"
-libraryBase = "1.16.0"
-onetapcompose = "1.0.0"
-realmGradlePlugin = "10.18.0"
 librarySync = "1.16.0"
 benchmarkMacro = "1.2.4"
 datetime = "0.2.9"
@@ -35,9 +32,6 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version = "1.2.1" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version = "1.6.7" }
-library-base = { group = "io.realm.kotlin", name = "library-base", version.ref = "libraryBase" }
-onetapcompose = { module = "com.github.stevdza-san:OneTapCompose", version.ref = "onetapcompose" }
-realm-gradle-plugin = { group = "io.realm", name = "realm-gradle-plugin", version.ref = "realmGradlePlugin" }
 library-sync = { group = "io.realm.kotlin", name = "library-sync", version.ref = "librarySync" }
 androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro", version.ref = "benchmarkMacro" }
 datetime = { group = "com.vanpra.compose-material-dialogs", name = "datetime", version.ref = "datetime" }

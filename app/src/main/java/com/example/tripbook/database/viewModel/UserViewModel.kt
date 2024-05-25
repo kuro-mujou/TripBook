@@ -19,11 +19,8 @@ class UserViewModel : ViewModel() {
         viewModelScope.launch {
             realm.write {
                 val newAccount = Account().apply {
-                    this.username = username
                     this.password = password
                     this.email = email
-                    this.securityQuestion = securityQuestion
-                    this.isServiceProvider = isServiceProvider
                     this.user = User()
                 }
                 copyToRealm(newAccount, updatePolicy = UpdatePolicy.ALL )

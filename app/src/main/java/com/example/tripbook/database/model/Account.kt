@@ -7,11 +7,8 @@ import org.mongodb.kbson.ObjectId
 class Account : RealmObject {
     @PrimaryKey
     var _id: ObjectId = ObjectId.invoke()
-    var owner_id: String = ""
-    var username: String = ""
+    var owner_id : String = ""
     var email: String = ""
-    var securityQuestion: String = ""
     var password: String = ""
-    var isServiceProvider: Boolean = false
-    var user: User? = null // Make User nullable
+    var user: User? = null
 }

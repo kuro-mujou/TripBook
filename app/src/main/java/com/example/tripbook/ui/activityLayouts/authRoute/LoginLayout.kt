@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
@@ -20,7 +21,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -56,6 +56,7 @@ fun LoginLayout(
     navController: NavController,
     authenticated: Boolean,
     onSuccessfulSignIn: (String, String) -> Unit,
+//    successfulSignIn: (String, String) -> Unit,
     navigateToHome: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
@@ -63,7 +64,6 @@ fun LoginLayout(
     var email: String by remember { mutableStateOf("") }
     var password: String by remember { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
-    var rememberMeCheckBox by rememberSaveable { mutableStateOf(false) }
 
     ModalBottomSheet(
         onDismissRequest = {
@@ -74,11 +74,11 @@ fun LoginLayout(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(600.dp),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
 
-            ) {
+        ) {
             Text(
                 text = "Welcome Back",
                 style = TextStyle(
@@ -99,14 +99,15 @@ fun LoginLayout(
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.MailOutline,
-                        contentDescription = "Person icon",
+                        contentDescription = "MailOutline icon",
                     )
                 },
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
                 ),
-                shape = RoundedCornerShape(25.dp)
+                shape = RoundedCornerShape(25.dp),
+                singleLine = true
             )
             TextField(
                 value = password,
@@ -117,7 +118,7 @@ fun LoginLayout(
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Lock,
-                        contentDescription = "Person icon",
+                        contentDescription = "Lock icon",
                     )
                 },
                 trailingIcon = {
@@ -134,45 +135,27 @@ fun LoginLayout(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
                 ),
-                shape = RoundedCornerShape(25.dp)
+                shape = RoundedCornerShape(25.dp),
+                singleLine = true
             )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    RadioButton(
-                        selected = rememberMeCheckBox,
-                        onClick = {
-                            rememberMeCheckBox = !rememberMeCheckBox
-                        }
-                    )
-                    Text(text = "Remember me", style = TextStyle(fontSize = 12.sp))
-                }
-
-                TextButton(
-                    onClick = {
-                        scope.launch { sheetState.hide() }.invokeOnCompletion {
-                            navController.navigate(Layouts.ResetPasswordRoute.route)
-                        }
+            TextButton(
+                onClick = {
+                    scope.launch { sheetState.hide() }.invokeOnCompletion {
+                        navController.navigate(Layouts.ResetPasswordRoute.route)
                     }
-                ) {
-                    Text(
-                        text = "Forgot password",
-                        style = TextStyle(
-                            textDecoration = TextDecoration.Underline
-                        )
-                    )
                 }
+            ) {
+                Text(
+                    text = "Forgot password",
+                    style = TextStyle(
+                        textDecoration = TextDecoration.Underline
+                    )
+                )
             }
             Button(
                 onClick = {
                     onSuccessfulSignIn(email, password)
+//                    successfulSignIn(email, password)
                 }
             ) {
                 Text("Sign in")

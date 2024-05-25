@@ -4,11 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
@@ -28,16 +28,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.tripbook.R
+import com.example.tripbook.navigationControl.Layouts
 import com.example.tripbook.ui.customUIComponent.PasswordFieldCustom
 import com.example.tripbook.ui.customUIComponent.TextFiledCustom
-import com.example.tripbook.navigationControl.Layouts
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ResetPasswordLayout(navController: NavController) {
 
 
-    var username: String by remember { mutableStateOf("") }
+    var email: String by remember { mutableStateOf("") }
     var newPassword: String by remember { mutableStateOf("") }
     var confirmPassword: String by remember { mutableStateOf("") }
 
@@ -53,10 +53,9 @@ fun ResetPasswordLayout(navController: NavController) {
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(500.dp),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.Center,
         ) {
             Text(
                 text = "Reset Password",
@@ -71,11 +70,11 @@ fun ResetPasswordLayout(navController: NavController) {
             Text(text = "Reset your password")
             Spacer(modifier = Modifier.height(40.dp))
             TextFiledCustom(
-                hint = "Username",
-                text = username,
-                icon = Icons.Default.Person
+                hint = "Email",
+                text = email,
+                icon = Icons.Default.MailOutline
             ) {
-                username = it
+                email = it
             }
             PasswordFieldCustom(
                 hint = "New password",

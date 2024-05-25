@@ -9,7 +9,6 @@ import androidx.navigation.navigation
 import com.example.tripbook.ui.activityLayouts.mainRoute.CommingSoon.LoadingLayout
 import com.example.tripbook.ui.activityLayouts.mainRoute.HomePageLayoutRoute.FavouriteLayout
 import com.example.tripbook.ui.activityLayouts.mainRoute.HomePageLayoutRoute.ProfileLayout
-import com.example.tripbook.ui.activityLayouts.mainRoute.HotelBookingRoute.AccountLayout
 import com.example.tripbook.ui.activityLayouts.mainRoute.HotelBookingRoute.HotelBookingLayout
 import com.example.tripbook.ui.activityLayouts.mainRoute.HotelBookingRoute.MyRoomLayout
 import com.example.tripbook.ui.activityLayouts.mainRoute.HotelBookingRoute.RoomAndGuestLayout
@@ -75,11 +74,7 @@ fun NavGraphBuilder.mainGraph(navController: NavController){
         ){
             MyRoomLayout(navController = navController)
         }
-        composable(
-            route = Layouts.AccountRoute.route
-        ){
-            AccountLayout(navController = navController)
-        }
+
 //        composable(route = Layouts.SettingLayoutRoute.route){
 //            SettingLayout()
 //        }

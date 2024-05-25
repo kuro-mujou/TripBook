@@ -71,10 +71,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    //github implementation
-    implementation(libs.onetapcompose)
-    implementation("com.github.stevdza-san:MessageBarCompose:1.0.5")
-    implementation ("androidx.navigation:navigation-compose:2.7.7")
-//    implementation(libs.messagebarcompose)
+    implementation (libs.androidx.navigation.compose)
 }

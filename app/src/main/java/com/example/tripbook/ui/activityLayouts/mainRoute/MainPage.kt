@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -22,6 +23,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.tripbook.R
 import com.example.tripbook.navigationControl.Layouts
+import com.example.tripbook.ui.activityLayouts.mainRoute.HotelBookingRoute.AccountLayout
+import com.example.tripbook.ui.activityLayouts.mainRoute.HotelBookingRoute.AccountViewModel
 
 @Composable
 fun MainPage(
@@ -81,7 +84,26 @@ fun MainPage(
                 HomePageLayout(navController = navController)
             }
             composable(route = Layouts.SettingLayoutRoute.route){
-                SettingLayout()
+                SettingLayout(
+                    navControllerChild = navHostController,
+                    navControllerGlobal = navController
+                )
+            }
+            composable(route = Layouts.AccountRoute.route){
+                val viewModel : AccountViewModel = viewModel()
+                viewModel.insertData()
+                AccountLayout(
+                    data = viewModel.getData(),
+                    navHostController,
+                    onNameChanged = viewModel::updateUserName,
+                    onDayOfBirthChanged = viewModel::updateUserDayOfBirth,
+                    onPhoneChanged = viewModel::updateUserPhone,
+                    onStreetChanged = viewModel::updateUserAddressStreet,
+                    onCityChanged = viewModel::updateUserAddressCity,
+                    onEmailChanged = viewModel::updateEmail,
+                    onPasswordChanged = viewModel::updatePassword,
+                    onUpdateClicked = viewModel::updateData,
+                )
             }
         }
     }
